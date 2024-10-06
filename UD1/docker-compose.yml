@@ -6,6 +6,7 @@ services:
       - 9000:9000
     volumes:
       - .:/app
+      - ./configuracion_php.ini:/opt/bitnami/php/etc/conf.d/configuracion_php.ini
   apache:
     image: bitnami/apache:latest
     ports:
