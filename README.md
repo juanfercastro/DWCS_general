@@ -5,4 +5,4 @@
  
 ### [Ejemplos](UD2/ejemplos)
 * [Hola mundo](UD2/ejemplos/hola_mundo.php)
-* [Tabla multiplicar](UD2/ejemplos/tabla_multiplicar.php.php)
+* [Tabla multiplicar](UD2/ejemplos/tabla_multiplicar.php)
