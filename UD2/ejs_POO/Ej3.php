@@ -70,6 +70,10 @@ class Direccion{
 
         return $this;
     }
+
+    public function direccionComp(){
+        return $this->calle.", ".$this->ciudad.", ".$this->codigoPostal;
+    }
 }
 
 class Persona{
@@ -77,10 +81,11 @@ class Persona{
     private int $edad;
     private Direccion $direccion;
 
-    public function __construct(string $nombre, int $edad, )
+    public function __construct(string $nombre, int $edad, Direccion $direccion)
     {
         $this->nombre = $nombre;
         $this->edad = $edad;
+        $this->direccion = $direccion;
     }
 
     /**
@@ -135,5 +140,12 @@ class Persona{
         }
     }
 
+    public function direccion(){
+        echo "Direccion: ".$this->direccion->direccionComp();
+    }
+
 }
+$direc = new Direccion("fausto", "pontevedra", "36999");
+$wey = new Persona("Fausitino", 80, $direc);
+echo $wey->direccion();
 ?>
