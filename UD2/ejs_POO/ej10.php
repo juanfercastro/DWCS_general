@@ -210,14 +210,20 @@ abstract class PersonaAbstracta{
     }
 }
 
-class Estudiante extends PersonaAbstracta{
+interface Identificable{
+    public function getIdentificador();
+}
+
+class Estudiante extends PersonaAbstracta implements Identificable{
     private int $grado;
     private array $calificaciones = array();
+    private $numEstudiante;
 
-    public function __construct(string $nombre, int $edad, Direccion $direccion, int $grado, array $calificaciones)
+    public function __construct(string $nombre, int $edad, Direccion $direccion, int $grado, array $calificaciones, $numEstudiante)
     {
         $this->grado = $grado;
         $this->calificaciones = $calificaciones;
+        $this->numEstudiante = $numEstudiante;
         parent::__construct($nombre, $edad, $direccion);
     }
 
@@ -261,6 +267,10 @@ class Estudiante extends PersonaAbstracta{
         return $this;
     }
 
+    public function getIdentificador(){
+        return $this->numEstudiante;
+    }
+
     public function esMayorDeEdad(){
         if ($this->getEdad()>= 18) {
             return true;
@@ -291,11 +301,13 @@ class Estudiante extends PersonaAbstracta{
  
 }
 
-class Profesor extends PersonaAbstracta{
+class Profesor extends PersonaAbstracta implements Identificable{
     private string $especialidad;
+    private $numProfesor;
 
-    public function __construct($nombre, $edad, $direccion, $especializacion){
+    public function __construct($nombre, $edad, $direccion, $especializacion, $numProfesor){
         $this->especialidad = $especializacion;
+        $this->numProfesor = $numProfesor;
         parent::__construct($nombre, $edad, $direccion);
     }
 
@@ -317,6 +329,10 @@ class Profesor extends PersonaAbstracta{
         $this->especialidad = $especialidad;
 
         return $this;
+    }
+
+    public function getIdentificador(){
+        return $this->numProfesor;
     }
 
     public function esMayorDeEdad(){
@@ -370,7 +386,10 @@ class Curso{
         }
     }
 }
-$direc = new Direccion("fausto", "pontevedra", "36999");
-$wey = new Estudiante("Rafa", 17, $direc, 2, []);
-echo $wey->esMayorDeEdad();
-$wey->mostrarInformacion();
+function mostrarIdentificadores(array $identificadores){
+    foreach($identificadores as $ident){
+        if ($ident instanceof Identificable) {
+            echo "Identificador: ".$ident->getIdentificador()."<br>";
+        }
+    }
+}
