@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS registros;
+USE registros;
+CREATE TABLE IF NOT EXISTS usuarios(
+    user_nic VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(60) NOT NULL,
+    apellido1 VARCHAR(100) NOT NULL,
+    apellido2 VARCHAR(100),
+    email VARCHAR(320) NOT NULL UNIQUE,
+    pass TEXT NOT NULL
+);
