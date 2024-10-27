@@ -19,6 +19,7 @@ if (isset($_POST["datos"])) {
         }
     }
 }
+$db->close();
 
 ?>
 <!DOCTYPE html>
