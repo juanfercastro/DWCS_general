@@ -1,17 +1,25 @@
 <?php
-$rand = rand(1, 1000);
+session_start();
+
+if (!isset($_SESSION['intentos'])) {
+    $_SESSION['numero'] = rand(1, 1000);
+    $_SESSION['intentos'] = 0;    
+}
 
 if (isset($_POST['adivinar'])) {
     $numero = $_POST['numero'];
-    if ($numero > $rand) {
+    if ($numero > $_SESSION['numero']) {
         echo "El número es menor";
-    }else if ($numero < $rand) {
+        $_SESSION['intentos']++;
+    }else if ($numero < $_SESSION['numero']) {
         echo "El número es mayor";
+        $_SESSION['intentos']++;
     }else{
-        die("Has acertado!");
+        $msg = "Has acertado. Te ha costado ".$_SESSION['intentos']." intentos";
+        echo "<script>alert('$msg');</script>";
+        session_unset();
     }
 }
-echo $rand;
 ?>
 <!DOCTYPE html>
 <html lang="en">
