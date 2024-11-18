@@ -5,21 +5,6 @@ if (!isset($_SESSION['intentos'])) {
     $_SESSION['numero'] = rand(1, 1000);
     $_SESSION['intentos'] = 0;    
 }
-
-if (isset($_POST['adivinar'])) {
-    $numero = $_POST['numero'];
-    if ($numero > $_SESSION['numero']) {
-        echo "El número es menor";
-        $_SESSION['intentos']++;
-    }else if ($numero < $_SESSION['numero']) {
-        echo "El número es mayor";
-        $_SESSION['intentos']++;
-    }else{
-        $msg = "Has acertado. Te ha costado ".$_SESSION['intentos']." intentos";
-        echo "<script>alert('$msg');</script>";
-        session_unset();
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +16,22 @@ if (isset($_POST['adivinar'])) {
 </head>
 <body>
     <h1>Bienvenido al número secreto</h1>
+    <?php
+    if (isset($_POST['adivinar'])) {
+        $numero = $_POST['numero'];
+        if ($numero > $_SESSION['numero']) {
+            echo "El número es menor";
+            $_SESSION['intentos']++;
+        }else if ($numero < $_SESSION['numero']) {
+            echo "El número es mayor";
+            $_SESSION['intentos']++;
+        }else{
+            $msg = "Has acertado. Te ha costado ".$_SESSION['intentos']." intentos";
+            echo "<script>alert('$msg');</script>";
+            session_unset();
+        }
+    }
+    ?>
     <form action="" method="post">
         <label for="numero">Número: </label>
         <input type="text" name="numero" id="numero">
