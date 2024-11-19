@@ -21,9 +21,18 @@ if (!isset($_SESSION['intentos'])) {
 </head>
 <body>
     <h1>Bienvenido al número secreto</h1>
+    <h3>Adivina un número entre 1 y 1000</h3>
     <?php
     if (isset($_POST['adivinar'])) {
         $numero = $_POST['numero'];
+        if ($_SESSION['intentos']==10) {
+            $number = $_SESSION['numero'];
+            session_unset();
+            $message = "Has alcanzado el máximo de intentos, el número era ".$number;
+            echo "<script>alert('$message');</script>";
+            header("Refresh:0");
+            exit;
+        }
         if ($numero > $_SESSION['numero']) {
             echo "El número es menor";
             $_SESSION['intentos']++;
@@ -57,6 +66,6 @@ if (!isset($_SESSION['intentos'])) {
         <label for="numero">Número: </label>
         <input type="text" name="numero" id="numero">
         <input type="submit" value="Adivinar" name="adivinar">
-    </form>
+    </form><br>
 </body>
 </html>
