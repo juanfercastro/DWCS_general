@@ -1,9 +1,25 @@
+<?php
+    $css;
+    if (isset($_COOKIE["style"])) {
+        $css = $_COOKIE["style"];
+    }else{
+        $css = "default";
+    }
+    if (isset($_GET["clear"]) && $_GET["clear"]=="y") {
+        setcookie("style", $_POST["estilo"], time()-60);
+        header("Location: index.php");
+    }
+    if (isset($_POST["estilo"])) {
+        setcookie("style",$_POST["estilo"],time()+604800);
+        $css = $_POST["estilo"];
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="default.css">
+        <link rel="stylesheet" href="<?php echo $css;?>.css">
         <title>Ejercicio 3.3.1</title>
     </head>
     <body>
