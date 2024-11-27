@@ -102,3 +102,19 @@ function comprobar_usuario(string $nic, string $pass):bool{
     return $toret;
 
 }
+
+function inicio_session($nombre){
+    session_start();
+    $_SESSION["nombre"] = $nombre;
+}
+
+/*
+    Esta funcion devuelve true o false dependiendo de si existe una sesion o no
+*/
+function comprobar_sesion(){
+    $flag = false;
+    if (isset($_SESSION["nombre"])) {
+        $flag = true;
+    }
+    return $flag;
+}
