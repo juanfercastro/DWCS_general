@@ -1,10 +1,20 @@
 <?php
 include("funciones.php");
-if (isset($_POST["nic"])) {
-    inicio_session($_POST["nic"]);
+session_start();
+if (comprobar_sesion()) {
     header("Location: restringido.php");
     exit;
 }
+if (isset($_POST["nic"])) {
+    inicio_session($_POST["nic"]);
+    if (isset($_POST['recuerdame'])) {
+        setcookie('recuerdame', $_POST['nic'], time()+30*24*3600);
+    }
+    header("Location: restringido.php");
+    exit;
+}
+$value = isset($_COOKIE['recuerdame'])?$_COOKIE['recuerdame']:'';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,9 +27,11 @@ if (isset($_POST["nic"])) {
     <fieldset>
         <form action="" method="post">
             <label for="nic">Nombre de usuario (nic)</label><br>
-            <input type="text" name="nic"><br>
+            <input type="text" name="nic" value="<?php echo $value;?>"><br>
             <label for="pass">Contraseña</label><br>
             <input type="password" name="pass"><br>
+            <input type="checkbox" name="recuerdame" id="recuerdame">
+            <label for="recuerdame">Recuerdame </label><br>
             <button type="submit">Acceder</button>
         </form>
     </fieldset>
