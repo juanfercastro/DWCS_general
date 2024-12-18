@@ -1,5 +1,4 @@
 <?php
-include("connectionDB.php");
 class Municipio{
     private int $codigo;
     private string $nombre;
@@ -141,8 +140,26 @@ class Municipio{
 }
 
 class MunicipioModel{
-    public static function get_municipio($cod_provincia){
-        $db=ConnectionDB::get();
-        $sql = "SELECT ";
+    public static function get_municipios(){
+
+        $db = ConnectionDB::get();
+        $sql = "SELECT cod_municipio,nombre,latitud,longitud,altitud,cod_provincia FROM municipio";
+        $statement = $db->prepare($sql);
+        $municipios = [];
+        try {
+            $statement->execute();
+            foreach($statement as $row){
+                $municipio = new Municipio($row['cod_municipio'],$row['nombre'],$row['latitud'], $row['longitud'], $row['altitud'], $row['cod_provincia']);
+                $municipios[] = $municipio;
+            }
+        } catch (PDOException $th) {
+            error_log("Error obteniendo escuelas ".$th->getMessage());
+        }finally{
+            $statement = null;
+            $db = null;
+        }
+
+        return $municipios;
+
     }
 }

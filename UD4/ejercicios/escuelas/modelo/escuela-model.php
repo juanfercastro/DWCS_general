@@ -244,8 +244,17 @@ class EscuelaModel{
 
     }
 
-    public static function alta_escuela($escuela){
-
+    public static function alta_escuela($nombre,$direccion,$hora_apertura,$hora_cierre,$comedor,$cod_municipio){
+        $db = ConnectionDB::get();
+        $sql = "INSERT INTO escuela (nombre, direccion, hora_apertura, hora_cierre, comedor, 
+                       cod_municipio) AS (?,?,?,?,?,?) ";
+        $statement = $db->prepare($sql);
+        $statement->bindValue(1,$nombre, PDO::PARAM_INT);
+        $statement->bindValue(2,$direccion, PDO::PARAM_STR);
+        $statement->bindValue(3,$hora_apertura, PDO::PARAM_STR);
+        $statement->bindValue(4,$hora_cierre, PDO::PARAM_STR);
+        $statement->bindValue(5,$comedor, PDO::PARAM_STR);
+        $statement->bindValue(6,$cod_municipio, PDO::PARAM_STR);
     }
 
     public static function baja_escuela($escuela){

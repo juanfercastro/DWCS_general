@@ -10,10 +10,14 @@
 
 <body>
     <!-- AQUI EL HEADER -->
+     <nav>
+        <a href="añadir-escuelas-view.php">da de alta escuelas</a>
+     </nav>
     <fieldset>
         <form action="" method="POST">
             <label for="municipio">Municipio</label>
             <select id="municipio" name="municipio">
+                <option value="">--</option>
                 <?php
                 foreach ($data['municipios'] as $m) {
                     echo '<option value="' . $m->getCodigo() . '">';
@@ -52,6 +56,7 @@
         ?>
     </table>
     <!-- AQUI EL FOOTER -->
+     <footer></footer>
 </body>
 
 </html>
