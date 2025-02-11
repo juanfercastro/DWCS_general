@@ -1,5 +1,7 @@
 <?php
 include_once("controller/main-controller.php");
+include_once("controller/ProductoController.php");
+include_once("controller/ClienteController.php");
 $controller = 'MainController';
 $action = 'principal';
 
