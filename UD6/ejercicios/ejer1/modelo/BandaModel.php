@@ -20,7 +20,7 @@ class Banda extends ModelObject{
 
     public static function fromJson($json):ModelObject{
         $data = json_decode($json);
-        return new Banda($data->nombre, $data->numIntegrantes, $data->nacionalidad, $data->genero, $data->id);
+        return new Banda($data->nombre, $data->num_integrantes, $data->nacionalidad, $data->genero, $data->id);
     }
 
 

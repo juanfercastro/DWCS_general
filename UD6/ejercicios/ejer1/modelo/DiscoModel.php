@@ -1,6 +1,6 @@
 <?php
 include_once("Model.php");
-include_once("ModelObject.php.php");
+include_once("ModelObject.php");
 
 class Disco extends ModelObject{
     public $id;
