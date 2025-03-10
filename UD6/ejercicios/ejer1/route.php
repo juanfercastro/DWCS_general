@@ -1,6 +1,7 @@
 <?php
 include_once("globals.php");
 include_once("controlador/Controller.php");
+include_once("controlador/AuthController.php");
 
 function getIds(array $uri):array{
     $ids = [];
@@ -37,7 +38,13 @@ if (count($uri) >= 5) {
         die();
     }
 }
-//TODO
+//control de acceso (AUTORIZACION)
+$token = $_SERVER["HTTP_X_API_KEY"];
+$auth = AuthController::checkPermisos($token, $endpoint, $method);
+if (!$auth) {
+    
+}
+
 switch ($metodo) {
     case 'POST':
         $json = file_get_contents('php://input');
