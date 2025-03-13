@@ -1,7 +1,7 @@
 <?php
-include_once("globals.php");
-include_once("controlador/Controller.php");
-/* include_once("controlador/AuthController.php"); */
+include_once("./globals.php");
+include_once(PATH_CONTROLLER."Controller.php");
+include_once(PATH_CONTROLLER."AuthController.php");
 
 function getIds(array $uri):array{
     $ids = [];
@@ -37,6 +37,12 @@ if (count($uri) >= 5) {
         Controller::sendNotFound("Error en la peticion. El parámetro debe ser un id correcto.");
         die();
     }
+}
+
+$token = $_SERVER["HTTP_X_API_KEY"];
+$auth = AuthController::checkPermisos($token,$endpoint,$metodo);
+if (!$auth) {
+    Controller::sendNotFound("No tiene permisos");
 }
 
 switch ($metodo) {
